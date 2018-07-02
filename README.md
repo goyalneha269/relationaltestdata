@@ -1,7 +1,7 @@
 # relationaltestdata
 The utilities available online are limited to the number of rows. So we designed a utility to generate large amount of test data.This utility comes with the feature of generating relational database. XML file is given as an input to the Class test.java and the output is a csv file.
 
-**XML File
+XML File
 Create a xml file defining the schema of each table of your database. Following are the possible XML tags.
 
         <filename>: Under this tag enter the name of output CSV file along with .csv extension.
@@ -31,7 +31,7 @@ Create a xml file defining the schema of each table of your database. Following 
 
 Enclose all the above tags within <records> tag.
 
-**Repository
+Repository
 Artifact can be fetched from bintray. Add following <repository> element to your <repositories> section in pom.xml:
   
     <repository>
@@ -40,7 +40,7 @@ Artifact can be fetched from bintray. Add following <repository> element to your
         <url>https://dl.bintray.com/smartcat-labs/maven</url>
     </repository>
 
-**Dependency
+Dependency
 Add the <dependency> element to your <dependencies> section in pom.xml with specific version.ranger you need:
 
     <dependency>
