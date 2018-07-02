@@ -1,12 +1,12 @@
 # relationaltestdata
 The utilities available online are limited to the number of rows. So we designed a utility to generate large amount of test data.This utility comes with the feature of generating relational database. XML file is given as an input to the Class test.java and the output is a csv file.
 
-XML File
+**XML File
 Create a xml file defining the schema of each table of your database. Following are the possible XML tags.
 
-<filename>: Under this tag enter the name of output CSV file along with .csv extension.
-<rows>: No. of rows of CSV files you want to generate.
-<column>: This tag is used to define the schema of individual columns of the table. Under <column> tag one can add following subtags.
+# <filename>: Under this tag enter the name of output CSV file along with .csv extension.
+# <rows>: No. of rows of CSV files you want to generate.
+# <column>: This tag is used to define the schema of individual columns of the table. Under <column> tag one can add following subtags.
     
     <columnname>: Enter the columnname
     
@@ -23,11 +23,12 @@ Create a xml file defining the schema of each table of your database. Following 
     If the given column is referring the primary key of any other table then define the <filepath> and <primarykeyname>tags.                  <filepath>: Enter the complete XML file path of the parent table.
              <primarykeyname>: Enter the column name of the primary key of parent table.
 
-<foreignkey>: If this table refers the primary of some other table (parent table) then this tag is used. You can have mulitple foreign keys referring multiple parent tables in a single child table. Under this tag the following subtags are defined.
+# <foreignkey>: If this table refers the primary of some other table (parent table) then this tag is used. You can have mulitple foreign keys referring multiple parent tables in a single child table. Under this tag the following subtags are defined.
      <foreignkeyname>: Enter the name of the column which is going to refer the primary key of parent table.
 
 Enclose all the above tags within <records> tag.
-Repository
+
+**Repository
 Artifact can be fetched from bintray. Add following <repository> element to your <repositories> section in pom.xml:
   
 <repository>
@@ -36,7 +37,7 @@ Artifact can be fetched from bintray. Add following <repository> element to your
   <url>https://dl.bintray.com/smartcat-labs/maven</url>
 </repository>
 
-Dependency
+**Dependency
 Add the <dependency> element to your <dependencies> section in pom.xml with specific version.ranger you need:
 
 <dependency>
