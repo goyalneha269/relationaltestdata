@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+
+<records>
+
+<filename>child1.csv</filename>
+
+<foreignkey fk="1">
+	<foreignkeyname>request_id</foreignkeyname>
+</foreignkey>
+
+<foreignkey fk="2">
+	<foreignkeyname>parent_id</foreignkeyname>
+</foreignkey>
+
+<column id="1">
+	<columnname>parent_id</columnname>
+	<filepath>C:\Users\NEHA GOYAL\Desktop\parent2.xml</filepath>
+	<primarykeyname>parent2_id</primarykeyname>
+	<datatype>int</datatype>
+	<length>4</length>
+</column>
+
+<column id="2">
+	<columnname>request_id</columnname>
+	<filepath>C:\Users\NEHA GOYAL\Desktop\parent1.xml</filepath>
+	<primarykeyname>request_id</primarykeyname>
+	<datatype>int</datatype>
+	<length>9</length>
+</column>
+
+<column id="3">
+	<columnname>address</columnname>
+	<datatype>char</datatype>
+	<length>5</length>
+</column>
+
+<rows>20000</rows>
+</records>

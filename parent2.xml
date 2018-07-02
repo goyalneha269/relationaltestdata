@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+
+<records>
+
+<filename>parent2.csv</filename>
+
+<primarykey>
+	<primarykeyname>parent2_id</primarykeyname>
+	<startrange>1</startrange>
+	<endrange>10000</endrange>
+</primarykey>
+
+<column id="1">
+	<columnname>parent2_id</columnname>
+	<datatype>int</datatype>
+	<unique>yes</unique>
+	<startrange>1</startrange>
+	<endrange>10000</endrange>
+	<length>9</length>
+</column>
+
+<column id="2">
+	<columnname>Degree</columnname>
+	<datatype>char</datatype>
+	<length>5</length>
+</column>
+
+
+
+<column id="4">	
+	<columnname>Age</columnname>
+	<datatype>int</datatype>
+	<startrange>20</startrange>
+	<endrange>50</endrange>
+</column>
+
+<rows>10000</rows>
+
+</records>

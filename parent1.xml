@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<records>
+
+<filename>parent1.csv</filename>
+<primarykey>
+	<primarykeyname>request_id</primarykeyname>
+	<startrange>1</startrange>
+	<endrange>10000</endrange>
+</primarykey>
+
+<column id="1">
+	<columnname>Date</columnname>
+	<datatype>datetime</datatype>
+	<length>8</length>
+</column>
+
+<column id="2">
+	<columnname>request_id</columnname>
+	<datatype>int</datatype>
+	<unique>yes</unique>
+	<startrange>1</startrange>
+	<endrange>10000</endrange>
+	<length>9</length>
+</column>
+
+<column id="3">
+	<columnname>firstname</columnname>
+	<datatype>char</datatype>
+	<length>5</length>
+</column>
+
+
+
+<column id="4">	
+	<columnname>lastname</columnname>
+	<datatype>char</datatype>
+	<length>4</length>
+</column>
+
+<rows>10000</rows>
+
+</records>
