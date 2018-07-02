@@ -29,7 +29,7 @@ Create a xml file defining the schema of each table of your database. Following 
       <foreignkey>: If this table refers the primary of some other table (parent table) then this tag is used. You can have mulitple foreign keys referring multiple parent tables in a single child table. Under this tag the following subtags are defined.
             <foreignkeyname>: Enter the name of the column which is going to refer the primary key of parent table.
 
-Enclose all the above tags within <records> tag.
+Enclose all the above tags within records tag.
 
 Repository
 Artifact can be fetched from bintray. Add following <repository> element to your <repositories> section in pom.xml:
