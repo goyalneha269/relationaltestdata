@@ -32,7 +32,8 @@ public class TableCreater extends Thread{
 	private FileWriter fileWriter = null;
 	private boolean fk = false;
 	private String foreignKeyDetails[];
-
+	private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+	
 	public void path(String filepath) {
 		this.filepath = filepath;
 		
@@ -156,6 +157,8 @@ public class TableCreater extends Thread{
 										headers.add(
 												eElement.getElementsByTagName("columnname").item(0).getTextContent());
 									}
+									else
+									{
 									length = Integer
 											.parseInt(eElement.getElementsByTagName("length").item(0).getTextContent());
 									float valuef = 9.0f;
@@ -165,6 +168,60 @@ public class TableCreater extends Thread{
 									ogb = ogb.prop(eElement.getElementsByTagName("columnname").item(0).getTextContent(),
 											random(range(0.0f, valuef)));
 									headers.add(eElement.getElementsByTagName("columnname").item(0).getTextContent());
+									}
+										break;
+								
+								case "long":
+									if (eElement.getElementsByTagName("startrange").item(0) != null
+											&& eElement.getElementsByTagName("endrange").item(0) != null) {
+										long start = Long.parseLong(
+												eElement.getElementsByTagName("startrange").item(0).getTextContent());
+										long end = Long.parseLong(
+												eElement.getElementsByTagName("endrange").item(0).getTextContent());
+										ogb = ogb.prop(
+												eElement.getElementsByTagName("columnname").item(0).getTextContent(),
+												random(range(start, end)));
+										headers.add(
+												eElement.getElementsByTagName("columnname").item(0).getTextContent());
+									} else {
+										length = Integer.parseInt(
+												eElement.getElementsByTagName("length").item(0).getTextContent());
+										long value = 9;
+										for (int i = 2; i <= length; i++) {
+											value = value * 10 + 9;
+										}
+										ogb = ogb.prop(
+												eElement.getElementsByTagName("columnname").item(0).getTextContent(),
+												random(range(0L, value)));
+										headers.add(
+												eElement.getElementsByTagName("columnname").item(0).getTextContent());
+									}
+									break;
+
+								case "double":
+									if (eElement.getElementsByTagName("startrange").item(0) != null
+											&& eElement.getElementsByTagName("endrange").item(0) != null) {
+										double start = Double.parseDouble(
+												eElement.getElementsByTagName("startrange").item(0).getTextContent());
+										double end = Double.parseDouble(
+												eElement.getElementsByTagName("endrange").item(0).getTextContent());
+										ogb = ogb.prop(
+												eElement.getElementsByTagName("columnname").item(0).getTextContent(),
+												random(range(start, end)));
+										headers.add(
+												eElement.getElementsByTagName("columnname").item(0).getTextContent());
+									}
+									else
+									{
+									length = Integer.parseInt(eElement.getElementsByTagName("length").item(0).getTextContent());
+									double valuef = 9.0d;
+									for (int i = 2; i < length; i++) {
+										valuef = valuef * 10 + 9;
+									}
+									ogb = ogb.prop(eElement.getElementsByTagName("columnname").item(0).getTextContent(),
+											random(range(0.0d, valuef)));
+									headers.add(eElement.getElementsByTagName("columnname").item(0).getTextContent());
+									}
 									break;
 
 								case "char":
@@ -181,16 +238,15 @@ public class TableCreater extends Thread{
 										String start = eElement.getElementsByTagName("startrange").item(0)
 												.getTextContent();
 										String end = eElement.getElementsByTagName("endrange").item(0).getTextContent();
-										DateFormat format = new SimpleDateFormat("YYYY/MM/DD hh:mm:ss", Locale.ENGLISH);
-										Date startdate = format.parse(start);
-										Date enddate = format.parse(end);
+										Date startdate = DATE_FORMAT.parse(start);
+										Date enddate = DATE_FORMAT.parse(end);
 										ogb = ogb.prop(
 												eElement.getElementsByTagName("columnname").item(0).getTextContent(),
 												random(range(startdate, enddate)));
 										headers.add(
 												eElement.getElementsByTagName("columnname").item(0).getTextContent());
 									} else {
-										final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
 										Date startdate = DATE_FORMAT.parse("2018-01-01");
 										Date enddate = DATE_FORMAT.parse("2018-03-31");
 										ogb = ogb.prop(
@@ -222,10 +278,16 @@ public class TableCreater extends Thread{
 				int temp = 0;
 				Map<String,Object> row=user.next();
 				for (temp = 0; temp < numberofcolumns - 1; temp++) {
-					
-					
-					fileWriter.append(row.get(headers.get(temp)).toString());
-					fileWriter.append(COMMA_DELIMITER);
+					if(row.get(headers.get(temp)) instanceof Date)
+					{
+						fileWriter.append(DATE_FORMAT.format((Date)row.get(headers.get(temp))));
+						fileWriter.append(COMMA_DELIMITER);
+					}
+					else
+					{
+						fileWriter.append(row.get(headers.get(temp)).toString());
+						fileWriter.append(COMMA_DELIMITER);
+					}
 				}
 				fileWriter.append(row.get(headers.get(temp)).toString());
 				fileWriter.append(NEW_LINE_SEPARATOR);
@@ -255,15 +317,18 @@ public class TableCreater extends Thread{
 			doc.getDocumentElement().normalize();
 			
 			if (doc.getElementsByTagName("primarykey").item(0) != null) {
-				Node primaryList = doc.getElementsByTagName("primarykey").item(0);
+				Node primaryList[] = doc.getElementsByTagName("primarykey");
 				
-				Element primaryElement=(Element)primaryList;
-				
-				if(primaryElement.getElementsByTagName("primarykeyname").item(0).getTextContent().equalsIgnoreCase(primarykeyname))
+				for(int i=0;i<primaryList.length;i++)
 				{
-					fkrange[0]=primaryElement.getElementsByTagName("startrange").item(0).getTextContent();
-					fkrange[1]=primaryElement.getElementsByTagName("endrange").item(0).getTextContent();
-					return fkrange;
+					Element primaryElement=(Element)primaryList.item(i);
+				
+					if(primaryElement.getElementsByTagName("primarykeyname").item(0).getTextContent().equalsIgnoreCase(primarykeyname))
+					{
+						fkrange[0]=primaryElement.getElementsByTagName("startrange").item(0).getTextContent();
+						fkrange[1]=primaryElement.getElementsByTagName("endrange").item(0).getTextContent();
+						return fkrange;
+					}
 				}
 			}
 			
