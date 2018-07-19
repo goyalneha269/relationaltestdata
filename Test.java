@@ -10,21 +10,16 @@ import org.xml.sax.SAXException;
 public class Test {
 
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
-
-		Scanner in=new Scanner(System.in);
 		
-		System.out.println("Enter the number of tables");
-		int n=in.nextInt();
-		in.nextLine();
+		int n=Integer.parseInt(args[0]);
 		
 		TableCreater R1[]=new TableCreater[n];
 		//Thread t1[]=new Thread[n];
 		String path[]=new String[n];
 		
-		System.out.println("Enter the complete path of all the tables");
 		for(int i=0;i<n;i++)
 		{
-			path[i]=in.nextLine();
+			path[i]=args[i+1];
 		}
 		
 		for(int i=0;i<n;i++)
